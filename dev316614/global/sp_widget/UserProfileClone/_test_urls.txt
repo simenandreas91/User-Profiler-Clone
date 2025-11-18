@@ -1,0 +1,4 @@
+https://dev316614.service-now.com/$sp.do?id=sp-preview&sys_id=00622795c315fad06b68770d050131ec
+https://dev316614.service-now.com/sp_config?id=user_profile_clone
+https://dev316614.service-now.com/sp?id=user_profile_clone
+https://dev316614.service-now.com/esc?id=user_profile_clone

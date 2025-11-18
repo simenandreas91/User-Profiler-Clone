@@ -1,0 +1,86 @@
+<div class="colleague-finder default-focus-outline" ng-cloak>
+  <h1 class="heading">Find a colleague!</h1>
+
+  <div class="search-row">
+    <div class="search-input">
+      <i class="fa fa-search input-icon" aria-hidden="true"></i>
+      <input type="text"
+             class="form-control"
+             placeholder="Search here to find a user..."
+             ng-model="c.searchText"
+             ng-keypress="c.handleKey($event)"
+             aria-label="Search for a colleague"
+             ng-disabled="c.state.loading">
+    </div>
+    <button class="btn btn-primary search-btn"
+            ng-click="c.searchUsers()"
+            ng-disabled="c.state.loading">
+      <span ng-if="!c.state.loading">Search</span>
+      <span ng-if="c.state.loading"><i class="fa fa-spinner fa-spin"></i> Searching...</span>
+    </button>
+  </div>
+
+  <p class="subtle-text" ng-if="!c.lastQuery">Search by a first or last name to see matching colleagues.</p>
+
+  <div class="alert alert-danger" ng-if="c.state.error">
+    {{::c.state.error}}
+  </div>
+
+  <div class="placeholder" ng-if="!c.state.loading && !c.results.length && c.lastQuery">
+    <i class="fa fa-search" aria-hidden="true"></i>
+    <p>No users found for "{{::c.lastQuery}}". Try another name.</p>
+  </div>
+
+  <div class="card-grid" ng-if="c.results.length">
+    <div class="profile-card"
+         ng-repeat="user in c.results track by user.sys_id"
+         ng-click="c.openProfile(user)"
+         tabindex="0"
+         ng-keypress="$event.key === 'Enter' && c.openProfile(user)">
+      <div class="card-header">
+        <div class="avatar-circle" ng-if="!user.photo">
+          <i class="fa fa-user"></i>
+        </div>
+        <div class="avatar-photo" ng-if="user.photo" ng-style="{'background-image':'url(' + user.photo + ')'}"></div>
+        <div class="card-title">
+          <div class="name">{{user.name || 'Unknown user'}}</div>
+          <div class="title" ng-if="user.title">{{user.title}}</div>
+          <div class="title muted" ng-if="!user.title">Title not set</div>
+        </div>
+      </div>
+      <ul class="card-meta list-unstyled">
+        <li><span class="label">Phone number</span><span class="value">{{user.phone || '-'}}</span></li>
+        <li><span class="label">Title</span><span class="value">{{user.title || '-'}}</span></li>
+        <li><span class="label">Department</span><span class="value">{{user.department || '-'}}</span></li>
+      </ul>
+      <div class="card-footer">
+        <button class="btn btn-link btn-sm" ng-click="c.jumpToFullProfile(user, $event)">Open profile page</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/ng-template" id="user-profile-modal.html">
+  <div class="modal-header">
+    <h4 class="modal-title">{{profile.name}}</h4>
+    <button type="button" class="close" aria-label="Close" ng-click="close()"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="modal-body user-profile-modal-body">
+    <div class="modal-avatar" ng-if="profile.photo" ng-style="{'background-image':'url(' + profile.photo + ')'}"></div>
+    <div class="modal-avatar placeholder" ng-if="!profile.photo"><i class="fa fa-user"></i></div>
+    <div class="modal-meta">
+      <div class="row meta-row"><span class="label">Title</span><span class="value">{{profile.title || '—'}}</span></div>
+      <div class="row meta-row"><span class="label">Department</span><span class="value">{{profile.department || '—'}}</span></div>
+      <div class="row meta-row"><span class="label">Phone number</span><span class="value">{{profile.phone || '—'}}</span></div>
+      <div class="row meta-row"><span class="label">Mobile phone</span><span class="value">{{profile.mobile_phone || '—'}}</span></div>
+      <div class="row meta-row"><span class="label">Email</span><span class="value"><a ng-if="profile.email" ng-href="mailto:{{profile.email}}">{{profile.email}}</a><span ng-if="!profile.email">—</span></span></div>
+      <div class="row meta-row"><span class="label">Location</span><span class="value">{{profile.location || '—'}}</span></div>
+      <div class="row meta-row"><span class="label">Company</span><span class="value">{{profile.company || '—'}}</span></div>
+      <div class="row meta-row"><span class="label">Manager</span><span class="value">{{profile.manager || '—'}}</span></div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" ng-click="close()">Close</button>
+    <a class="btn btn-primary" ng-href="?id=user_profile&sys_id={{profile.sys_id}}">Open full profile</a>
+  </div>
+</script>

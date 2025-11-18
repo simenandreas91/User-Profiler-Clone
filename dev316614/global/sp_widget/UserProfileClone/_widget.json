@@ -1,0 +1,426 @@
+{
+    "instance": {
+        "name": "dev316614",
+        "url": "https://dev316614.service-now.com",
+        "g_ck": "0bc82a19c359bad06b68770d0501313ceb9133accdbda22d414b124b0b6d07f8d9a0a345"
+    },
+    "action": "saveWidget",
+    "tableName": "sp_widget",
+    "name": "User Profile Clone",
+    "sys_id": "00622795c315fad06b68770d050131ec",
+    "widget": {
+        "template": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Body HTML template",
+            "sys_readonly": false,
+            "type": "html_template",
+            "mandatory": false,
+            "displayValue": "<div class=\"default-focus-outline user-profile-container\">\n  <div ng-if=\"!data.userExists\" class=\"panel panel-default\">\n      <div class=\"panel-body wrapper-lg text-center\">\n        <p>${Requested user not found}</p>\n      </div>\n  </div>\n  <div ng-if=\"data.userExists\">\n    <div class=\"panel panel-default\">\n      <div class=\"panel-body\">\n        <div class=\"row\">\n          <div class=\"col-xs-12 col-sm-4 text-center\">\n            <div class=\"row\">\n              <div class=\"avatar-extra-large avatar-container\" style=\"cursor:default;\" aria-hidden=\"true\">\n                <div class=\"avatar soloAvatar bottom\">\n                  <div class=\"sub-avatar mia\" ng-style=\"avatarPicture\"><i class=\"fa fa-user\"></i></div>\n                </div>\n              </div>\n            </div>\n            <div class=\"row\">\n              <button ng-if=\"::connectEnabled()\" ng-click=\"openConnectConversation()\" type=\"button\"\n                      class=\"btn btn-primary send-message\"><span class=\"glyphicon glyphicon-comment pad-right\"></span>${Message}</button>\n              <!-- file upload -->\n              <span ng-if=\"::data.isLoggedInUsersProfile\">\n                <input ng-show=\"false\" type=\"file\" accept=\"image/jpeg,image/png,image/bmp,image/x-windows-bmp,image/gif,image/x-icon,image/svg+xml\" ng-file-select=\"attachFiles({files: $files})\" />\n                <button ng-click=\"uploadNewProfilePicture($event)\"\n                        type=\"button\"\n                        class=\"btn btn-default send-message\">${Upload Picture}</button>\n              </span>\n            </div>\n          </div>\n          <div class=\"col-xs-12 col-sm-8 user-details\">\n            <h2>{{data.name}}</h2>\n            <p ng-if=\"::displayField('sys_user', 'company', true)\"><strong class=\"pad-right\">${Company}</strong><sp-editable-field editable-by-user=\"data.isLoggedInUsersProfile\" table=\"sys_user\" table-id=\"data.sysUserID\" field-model=\"data.sysUserModel.company\"></sp-editable-field></p>\n            <p ng-if=\"::displayField('sys_user', 'title', true)\"><strong class=\"pad-right\">${Title}</strong><sp-editable-field editable-by-user=\"data.isLoggedInUsersProfile\" table=\"sys_user\" table-id=\"data.sysUserID\" field-model=\"data.sysUserModel.title\"></sp-editable-field></p>\n            <p ng-if=\"::displayField('sys_user', 'department', true)\"><strong class=\"pad-right\">${Department}</strong><sp-editable-field editable-by-user=\"data.isLoggedInUsersProfile\" table=\"sys_user\" table-id=\"data.sysUserID\" field-model=\"data.sysUserModel.department\"></sp-editable-field></p>\n            <p ng-if=\"::displayField('sys_user', 'location', true)\"><strong class=\"pad-right\">${Location}</strong><sp-editable-field editable-by-user=\"data.isLoggedInUsersProfile\" table=\"sys_user\" table-id=\"data.sysUserID\" field-model=\"data.sysUserModel.location\"></sp-editable-field></p>\n            <p ng-if=\"::(data.liveProfileID && displayField('live_profile', 'short_description', true))\"><strong class=\"pad-right\">${Bio}</strong><sp-editable-field editable-by-user=\"data.isLoggedInUsersProfile\" table=\"live_profile\" table-id=\"data.liveProfileID\" field-model=\"data.liveProfileModel.short_description\"></sp-editable-field></p>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div ng-class=\"{'col-md-6': teamExists(), 'col-md-12': !teamExists()}\" class=\"col-sm-12 col-xs-12\">\n        <div class=\"panel panel-default b\" ng-if=\"getSysUserModelFields().length > 0\">\n          <div class=\"panel-heading\">\n            <h2 class=\"panel-title\">\n              <i class=\"fa fa-info-circle m-r-sm\"></i>${About}\n            </h2>\n          </div>\n          <div class=\"body padder-xs\">\n            <div class=\"list-group\">\n              <div ng-repeat=\"fieldModel in sysUserModelFields\">\n                <div class=\"list-group-item\">\n                  <div>\n                    <sp-editable-field block=\"true\" table=\"{{data.table}}\" editable-by-user=\"data.isLoggedInUsersProfile\" table-id=\"data.sysUserID\" field-model=\"fieldModel\"></sp-editable-field>\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n          <div class=\"panel-footer clearfix\" ng-if=\"data.dateTimeFormatChanged\">\n            <a id=\"refresh-to-complete-date-format-change\" href=\"javascript:void(0)\"\n               ng-click=\"reloadPage()\" class=\"pull-right btn btn-primary\"><i class=\"fa fa-refresh m-r-sm\" aria-hidden=\"true\"></i>${Refresh page to complete date/time format change}</a>\n          </div>\n        </div>\n      </div>\n      <div ng-if=\"teamExists()\" class=\"col-md-6 col-sm-12 col-xs-12\">\n        <sp-widget widget=\"data.teamWidget\"></sp-widget>\n      </div>\n    </div>\n    <sp-widget widget=\"data.userPreferencesWidget\"></sp-widget>\n  </div>\n</div>",
+            "readonly": false,
+            "hint": "",
+            "name": "template",
+            "attributes": {},
+            "choice": 0,
+            "value": "<div class=\"default-focus-outline user-profile-container\">\n  <div ng-if=\"!data.userExists\" class=\"panel panel-default\">\n      <div class=\"panel-body wrapper-lg text-center\">\n        <p>${Requested user not found}</p>\n      </div>\n  </div>\n  <div ng-if=\"data.userExists\">\n    <div class=\"panel panel-default\">\n      <div class=\"panel-body\">\n        <div class=\"row\">\n          <div class=\"col-xs-12 col-sm-4 text-center\">\n            <div class=\"row\">\n              <div class=\"avatar-extra-large avatar-container\" style=\"cursor:default;\" aria-hidden=\"true\">\n                <div class=\"avatar soloAvatar bottom\">\n                  <div class=\"sub-avatar mia\" ng-style=\"avatarPicture\"><i class=\"fa fa-user\"></i></div>\n                </div>\n              </div>\n            </div>\n            <div class=\"row\">\n              <button ng-if=\"::connectEnabled()\" ng-click=\"openConnectConversation()\" type=\"button\"\n                      class=\"btn btn-primary send-message\"><span class=\"glyphicon glyphicon-comment pad-right\"></span>${Message}</button>\n              <!-- file upload -->\n              <span ng-if=\"::data.isLoggedInUsersProfile\">\n                <input ng-show=\"false\" type=\"file\" accept=\"image/jpeg,image/png,image/bmp,image/x-windows-bmp,image/gif,image/x-icon,image/svg+xml\" ng-file-select=\"attachFiles({files: $files})\" />\n                <button ng-click=\"uploadNewProfilePicture($event)\"\n                        type=\"button\"\n                        class=\"btn btn-default send-message\">${Upload Picture}</button>\n              </span>\n            </div>\n          </div>\n          <div class=\"col-xs-12 col-sm-8 user-details\">\n            <h2>{{data.name}}</h2>\n            <p ng-if=\"::displayField('sys_user', 'company', true)\"><strong class=\"pad-right\">${Company}</strong><sp-editable-field editable-by-user=\"data.isLoggedInUsersProfile\" table=\"sys_user\" table-id=\"data.sysUserID\" field-model=\"data.sysUserModel.company\"></sp-editable-field></p>\n            <p ng-if=\"::displayField('sys_user', 'title', true)\"><strong class=\"pad-right\">${Title}</strong><sp-editable-field editable-by-user=\"data.isLoggedInUsersProfile\" table=\"sys_user\" table-id=\"data.sysUserID\" field-model=\"data.sysUserModel.title\"></sp-editable-field></p>\n            <p ng-if=\"::displayField('sys_user', 'department', true)\"><strong class=\"pad-right\">${Department}</strong><sp-editable-field editable-by-user=\"data.isLoggedInUsersProfile\" table=\"sys_user\" table-id=\"data.sysUserID\" field-model=\"data.sysUserModel.department\"></sp-editable-field></p>\n            <p ng-if=\"::displayField('sys_user', 'location', true)\"><strong class=\"pad-right\">${Location}</strong><sp-editable-field editable-by-user=\"data.isLoggedInUsersProfile\" table=\"sys_user\" table-id=\"data.sysUserID\" field-model=\"data.sysUserModel.location\"></sp-editable-field></p>\n            <p ng-if=\"::(data.liveProfileID && displayField('live_profile', 'short_description', true))\"><strong class=\"pad-right\">${Bio}</strong><sp-editable-field editable-by-user=\"data.isLoggedInUsersProfile\" table=\"live_profile\" table-id=\"data.liveProfileID\" field-model=\"data.liveProfileModel.short_description\"></sp-editable-field></p>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div ng-class=\"{'col-md-6': teamExists(), 'col-md-12': !teamExists()}\" class=\"col-sm-12 col-xs-12\">\n        <div class=\"panel panel-default b\" ng-if=\"getSysUserModelFields().length > 0\">\n          <div class=\"panel-heading\">\n            <h2 class=\"panel-title\">\n              <i class=\"fa fa-info-circle m-r-sm\"></i>${About}\n            </h2>\n          </div>\n          <div class=\"body padder-xs\">\n            <div class=\"list-group\">\n              <div ng-repeat=\"fieldModel in sysUserModelFields\">\n                <div class=\"list-group-item\">\n                  <div>\n                    <sp-editable-field block=\"true\" table=\"{{data.table}}\" editable-by-user=\"data.isLoggedInUsersProfile\" table-id=\"data.sysUserID\" field-model=\"fieldModel\"></sp-editable-field>\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n          <div class=\"panel-footer clearfix\" ng-if=\"data.dateTimeFormatChanged\">\n            <a id=\"refresh-to-complete-date-format-change\" href=\"javascript:void(0)\"\n               ng-click=\"reloadPage()\" class=\"pull-right btn btn-primary\"><i class=\"fa fa-refresh m-r-sm\" aria-hidden=\"true\"></i>${Refresh page to complete date/time format change}</a>\n          </div>\n        </div>\n      </div>\n      <div ng-if=\"teamExists()\" class=\"col-md-6 col-sm-12 col-xs-12\">\n        <sp-widget widget=\"data.teamWidget\"></sp-widget>\n      </div>\n    </div>\n    <sp-widget widget=\"data.userPreferencesWidget\"></sp-widget>\n  </div>\n</div>",
+            "max_length": 65000,
+            "ed": {
+                "name": "template"
+            }
+        },
+        "css": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "CSS",
+            "sys_readonly": false,
+            "type": "css",
+            "mandatory": false,
+            "displayValue": ".list-group-item {\n  border: none;\n  padding: 5px 15px;\n\n  .btn-link {\n  \tpadding-left: 0;\n    padding-right: 0;\n  }\n}\n\n.user-details {\n  word-wrap: break-word; // ie support\n  overflow-wrap: break-word;\n}\n\n.select2-container.select2-allowclear .select2-choice .select2-chosen {\n  margin-right: 60px;\n}\n\n.mia i {\n  font-size: 6rem;\n}\n\n.mia {\n  color: #808080;\n}\n\n.popover {\n  z-index: 1049;\n}\n\n.user-profile-container {\n  width: 100%;\n  max-width: 755px;\n  margin: 0 auto;\n  padding: 0 8px;\n}\n.input-switch input[type=checkbox]:checked ~ .switch {\n\tbackground-color: $brand-primary;\n}\n\n// accessible accessibility toggle\n@media screen and (-ms-high-contrast: active) {\n  .input-switch input.ng-not-empty+label.switch[for=\"accessibility-enabled\"] {\n    background-color: highlight;\n    border: none;\n\n    &:before {\n      background-color: highlightText;\n    }\n  }\n\n  .input-switch input.ng-empty+label[for=\"accessibility-enabled\"] {\n    background-color: window;\n    border: 1px solid windowText;\n\n    &:before {\n      background-color: windowText;\n    }\n  }\n  .list-group-item .input-switch {\n  \tmargin-bottom: 3px;\n  } \n}",
+            "readonly": false,
+            "hint": "",
+            "name": "css",
+            "attributes": {},
+            "choice": 0,
+            "value": ".list-group-item {\n  border: none;\n  padding: 5px 15px;\n\n  .btn-link {\n  \tpadding-left: 0;\n    padding-right: 0;\n  }\n}\n\n.user-details {\n  word-wrap: break-word; // ie support\n  overflow-wrap: break-word;\n}\n\n.select2-container.select2-allowclear .select2-choice .select2-chosen {\n  margin-right: 60px;\n}\n\n.mia i {\n  font-size: 6rem;\n}\n\n.mia {\n  color: #808080;\n}\n\n.popover {\n  z-index: 1049;\n}\n\n.user-profile-container {\n  width: 100%;\n  max-width: 755px;\n  margin: 0 auto;\n  padding: 0 8px;\n}\n.input-switch input[type=checkbox]:checked ~ .switch {\n\tbackground-color: $brand-primary;\n}\n\n// accessible accessibility toggle\n@media screen and (-ms-high-contrast: active) {\n  .input-switch input.ng-not-empty+label.switch[for=\"accessibility-enabled\"] {\n    background-color: highlight;\n    border: none;\n\n    &:before {\n      background-color: highlightText;\n    }\n  }\n\n  .input-switch input.ng-empty+label[for=\"accessibility-enabled\"] {\n    background-color: window;\n    border: 1px solid windowText;\n\n    &:before {\n      background-color: windowText;\n    }\n  }\n  .list-group-item .input-switch {\n  \tmargin-bottom: 3px;\n  } \n}",
+            "max_length": 8000,
+            "ed": {
+                "name": "css"
+            }
+        },
+        "roles": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": 12,
+            "label": "Roles",
+            "sys_readonly": false,
+            "type": "user_roles",
+            "mandatory": false,
+            "displayValue": "",
+            "readonly": false,
+            "hint": "",
+            "name": "roles",
+            "attributes": {
+                "no_truncate": "true",
+                "update_exempt": "true",
+                "record_watcher_blacklist": "true"
+            },
+            "choice": 0,
+            "value": "",
+            "max_length": 255,
+            "ed": {
+                "name": "roles"
+            }
+        },
+        "link": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Link",
+            "sys_readonly": false,
+            "type": "script",
+            "mandatory": false,
+            "displayValue": "function link(scope, element, attrs, controller) {\r  \r}",
+            "readonly": false,
+            "hint": "",
+            "name": "link",
+            "attributes": {
+                "client_script": "true"
+            },
+            "choice": 0,
+            "value": "function link(scope, element, attrs, controller) {\r  \r}",
+            "max_length": 65000,
+            "ed": {
+                "name": "link"
+            }
+        },
+        "description": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Description",
+            "sys_readonly": false,
+            "type": "string",
+            "mandatory": false,
+            "displayValue": "",
+            "readonly": false,
+            "hint": "Defines what the widget does",
+            "name": "description",
+            "attributes": {
+                "edge_encryption_enabled": "true"
+            },
+            "choice": 0,
+            "value": "",
+            "max_length": 300,
+            "ed": {
+                "name": "description"
+            }
+        },
+        "demo_data": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Demo data",
+            "sys_readonly": false,
+            "type": "json",
+            "mandatory": false,
+            "displayValue": "",
+            "readonly": false,
+            "hint": "",
+            "name": "demo_data",
+            "attributes": {},
+            "choice": 0,
+            "value": "",
+            "max_length": 8000,
+            "ed": {
+                "name": "demo_data"
+            }
+        },
+        "option_schema": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Option schema",
+            "sys_readonly": false,
+            "type": "json",
+            "mandatory": false,
+            "displayValue": "[{\"hint\":\"Display the current user in the teams widget\",\"name\":\"show_current_user\",\"section\":\"other\",\"default_value\":\"false\",\"label\":\"Show current user\",\"type\":\"boolean\"}]",
+            "readonly": false,
+            "hint": "",
+            "name": "option_schema",
+            "attributes": {},
+            "choice": 0,
+            "value": "[{\"hint\":\"Display the current user in the teams widget\",\"name\":\"show_current_user\",\"section\":\"other\",\"default_value\":\"false\",\"label\":\"Show current user\",\"type\":\"boolean\"}]",
+            "max_length": 8000,
+            "ed": {
+                "name": "option_schema"
+            }
+        },
+        "script": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Server script",
+            "sys_readonly": false,
+            "type": "script",
+            "mandatory": false,
+            "displayValue": "(function() {\n\t\tif (input && input.action === \"update_session_tracking_info\") {\n\t\tgs.getSession().putProperty(\"usage_tracking_allowed_for_session\", input.user_tracking);\n\t\treturn;\n\t\t\n\t}\n\n\t// populate the 'data' object\n\t// e.g., data.table = $sp.getValue('table');\n\tdata.sysUserID = $sp.getParameter(\"sys_id\");\n\tif (!data.sysUserID)\n\t\t\tdata.sysUserID = gs.getUser().getID();\n\tvar sysUserGR = new GlideRecord(\"sys_user\");\n\tdata.userExists = sysUserGR.get(data.sysUserID) && sysUserGR.canRead();\n\n\tif (data.userExists) {\n\t\tsysUserGR = GlideScriptRecordUtil.get(sysUserGR).getRealRecord();\n\t\tdata.table = sysUserGR.getRecordClassName();\n\t\tdata.name = sysUserGR.getValue(\"name\");\n\t\tvar loggedInSysUserID = gs.getUser().getID();\n\t\tdata.connectEnabled = GlidePluginManager().isActive('com.glide.connect');\n\t\tdata.liveProfileID = new GlideappLiveProfile().getID();\n\t\tdata.dateTimeFormat = gs.getDateTimeFormat();\n\n\t\t//get live profile id for sending connect messages\n\t\tif (GlidePluginManager().isActive('com.glideapp.live_common')) {\n\t\t\tvar liveProfileGR = new GlideRecord(\"live_profile\");\n\t\t\tliveProfileGR.addQuery(\"sys_id\", data.liveProfileID);\n\t\t\tliveProfileGR.query();\n\t\t\tif (liveProfileGR.next()) {\n\t\t\t\tdata.liveProfileModel = $sp.getForm(\"live_profile\", data.liveProfileID)._fields;\n\t\t\t\t// live_profile short_description is shown here as \"Bio\", so popup label/hint must reflect that\n\t\t\t\tif (data.liveProfileModel.short_description) {\n\t\t\t\t\tdata.liveProfileModel.short_description.label = gs.getMessage(\"Bio\");\n\t\t\t\t\tdata.liveProfileModel.short_description.hint = gs.getMessage(\"Biography\");\n\t\t\t\t}\n\t\t\t} else\n\t\t\t\tdata.connectEnabled = false; //can't find a live profile for this user, so lets not integrate Connect\n\t\t}\n\n\t\tdata.isLoggedInUsersProfile = loggedInSysUserID.equals(data.sysUserID);\n\t\tvar sysUserForm = $sp.getForm(data.table, data.sysUserID);\n\t\tdata.sysUserView = sysUserForm._view;\n\t\tdata.sysUserModel = sysUserForm._fields;\n\t\tdata.sysUserModelList = [];\n\n\t\tfor (var i = 0; i < data.sysUserView.length; i++) {\n\t\t\tdata.sysUserModelList.push(data.sysUserModel[data.sysUserView[i].name]);\n\t\t}\n\n\t\tdata.directReports = [];\n\t\tdata.teamData = {};\n\t\tdata.teamData.direct_reports = [];\n\t\tdata.teamData.members = [];\n\n\t\tif (!data.isLoggedInUsersProfile) {\n\t\t\tdata.teamData.user = {\n\t\t\t\tsys_id: data.sysUserID\n\t\t\t}\n\t\t}\n\n\t\t//Calculate manager\n\t\tvar managerGR = new GlideRecord(\"sys_user\");\n\t\tif (managerGR.get(sysUserGR.getValue(\"manager\"))) {\n\t\t\tdata.teamData.manager = buildUser(managerGR);\n\t\t}\n\n\t\t//Calculate team\n\t\tif (data.teamData.manager) {\n\t\t\tvar teamGR = new GlideRecord(\"sys_user\");\n\t\t\tteamGR.addActiveQuery();\n\t\t\tteamGR.orderBy(\"name\");\n\t\t\tteamGR.addQuery(\"manager\", data.teamData.manager.sys_id);\n\t\t\tteamGR.addQuery(\"sys_id\", \"!=\", data.sysUserID);\n\t\t\tteamGR.query();\n\t\t\twhile(teamGR.next())\n\t\t\t\tdata.teamData.members.push(buildUser(teamGR));\n\t\t}\n\n\t\t//Calculate direct reports\n\t\tvar directReportGR = new GlideRecordSecure(\"sys_user\");\n\t\tdirectReportGR.addActiveQuery();\n\t\tdirectReportGR.orderBy(\"name\");\n\t\tdirectReportGR.addQuery(\"manager\", data.sysUserID);\n\t\tdirectReportGR.query();\n\n\t\twhile(directReportGR.next())\n\t\t\tdata.teamData.direct_reports.push(buildUser(directReportGR));\n\n\t\tdata.teamWidget = $sp.getWidget('sp-my-team', {glyph: 'user', color: 'primary', show_current_user: options.show_current_user});\n\t\tif(!input)\n\t\t\tdata.userPreferencesWidget = $sp.getWidget('user-preferences', {glyph: 'user', color: 'primary'});\n\n\t\t}\n\n\tfunction buildUser(userGR) {\n\t\treturn {\n\t\t\temail: userGR.getValue(\"email\") || \"\",\n\t\t\tfirst_name: userGR.getValue(\"first_name\"),\n\t\t\tlast_name: userGR.getValue(\"last_name\"),\n\t\t\tname: userGR.getValue(\"name\"),\n\t\t\tphone: userGR.getValue(\"phone\") || \"\",\n\t\t\tsys_id: userGR.getValue(\"sys_id\")\n\t\t}\n\t}\n\n\n\t})();",
+            "readonly": false,
+            "hint": "",
+            "name": "script",
+            "attributes": {},
+            "choice": 0,
+            "value": "(function() {\n\t\tif (input && input.action === \"update_session_tracking_info\") {\n\t\tgs.getSession().putProperty(\"usage_tracking_allowed_for_session\", input.user_tracking);\n\t\treturn;\n\t\t\n\t}\n\n\t// populate the 'data' object\n\t// e.g., data.table = $sp.getValue('table');\n\tdata.sysUserID = $sp.getParameter(\"sys_id\");\n\tif (!data.sysUserID)\n\t\t\tdata.sysUserID = gs.getUser().getID();\n\tvar sysUserGR = new GlideRecord(\"sys_user\");\n\tdata.userExists = sysUserGR.get(data.sysUserID) && sysUserGR.canRead();\n\n\tif (data.userExists) {\n\t\tsysUserGR = GlideScriptRecordUtil.get(sysUserGR).getRealRecord();\n\t\tdata.table = sysUserGR.getRecordClassName();\n\t\tdata.name = sysUserGR.getValue(\"name\");\n\t\tvar loggedInSysUserID = gs.getUser().getID();\n\t\tdata.connectEnabled = GlidePluginManager().isActive('com.glide.connect');\n\t\tdata.liveProfileID = new GlideappLiveProfile().getID();\n\t\tdata.dateTimeFormat = gs.getDateTimeFormat();\n\n\t\t//get live profile id for sending connect messages\n\t\tif (GlidePluginManager().isActive('com.glideapp.live_common')) {\n\t\t\tvar liveProfileGR = new GlideRecord(\"live_profile\");\n\t\t\tliveProfileGR.addQuery(\"sys_id\", data.liveProfileID);\n\t\t\tliveProfileGR.query();\n\t\t\tif (liveProfileGR.next()) {\n\t\t\t\tdata.liveProfileModel = $sp.getForm(\"live_profile\", data.liveProfileID)._fields;\n\t\t\t\t// live_profile short_description is shown here as \"Bio\", so popup label/hint must reflect that\n\t\t\t\tif (data.liveProfileModel.short_description) {\n\t\t\t\t\tdata.liveProfileModel.short_description.label = gs.getMessage(\"Bio\");\n\t\t\t\t\tdata.liveProfileModel.short_description.hint = gs.getMessage(\"Biography\");\n\t\t\t\t}\n\t\t\t} else\n\t\t\t\tdata.connectEnabled = false; //can't find a live profile for this user, so lets not integrate Connect\n\t\t}\n\n\t\tdata.isLoggedInUsersProfile = loggedInSysUserID.equals(data.sysUserID);\n\t\tvar sysUserForm = $sp.getForm(data.table, data.sysUserID);\n\t\tdata.sysUserView = sysUserForm._view;\n\t\tdata.sysUserModel = sysUserForm._fields;\n\t\tdata.sysUserModelList = [];\n\n\t\tfor (var i = 0; i < data.sysUserView.length; i++) {\n\t\t\tdata.sysUserModelList.push(data.sysUserModel[data.sysUserView[i].name]);\n\t\t}\n\n\t\tdata.directReports = [];\n\t\tdata.teamData = {};\n\t\tdata.teamData.direct_reports = [];\n\t\tdata.teamData.members = [];\n\n\t\tif (!data.isLoggedInUsersProfile) {\n\t\t\tdata.teamData.user = {\n\t\t\t\tsys_id: data.sysUserID\n\t\t\t}\n\t\t}\n\n\t\t//Calculate manager\n\t\tvar managerGR = new GlideRecord(\"sys_user\");\n\t\tif (managerGR.get(sysUserGR.getValue(\"manager\"))) {\n\t\t\tdata.teamData.manager = buildUser(managerGR);\n\t\t}\n\n\t\t//Calculate team\n\t\tif (data.teamData.manager) {\n\t\t\tvar teamGR = new GlideRecord(\"sys_user\");\n\t\t\tteamGR.addActiveQuery();\n\t\t\tteamGR.orderBy(\"name\");\n\t\t\tteamGR.addQuery(\"manager\", data.teamData.manager.sys_id);\n\t\t\tteamGR.addQuery(\"sys_id\", \"!=\", data.sysUserID);\n\t\t\tteamGR.query();\n\t\t\twhile(teamGR.next())\n\t\t\t\tdata.teamData.members.push(buildUser(teamGR));\n\t\t}\n\n\t\t//Calculate direct reports\n\t\tvar directReportGR = new GlideRecordSecure(\"sys_user\");\n\t\tdirectReportGR.addActiveQuery();\n\t\tdirectReportGR.orderBy(\"name\");\n\t\tdirectReportGR.addQuery(\"manager\", data.sysUserID);\n\t\tdirectReportGR.query();\n\n\t\twhile(directReportGR.next())\n\t\t\tdata.teamData.direct_reports.push(buildUser(directReportGR));\n\n\t\tdata.teamWidget = $sp.getWidget('sp-my-team', {glyph: 'user', color: 'primary', show_current_user: options.show_current_user});\n\t\tif(!input)\n\t\t\tdata.userPreferencesWidget = $sp.getWidget('user-preferences', {glyph: 'user', color: 'primary'});\n\n\t\t}\n\n\tfunction buildUser(userGR) {\n\t\treturn {\n\t\t\temail: userGR.getValue(\"email\") || \"\",\n\t\t\tfirst_name: userGR.getValue(\"first_name\"),\n\t\t\tlast_name: userGR.getValue(\"last_name\"),\n\t\t\tname: userGR.getValue(\"name\"),\n\t\t\tphone: userGR.getValue(\"phone\") || \"\",\n\t\t\tsys_id: userGR.getValue(\"sys_id\")\n\t\t}\n\t}\n\n\n\t})();",
+            "max_length": 65000,
+            "ed": {
+                "name": "script"
+            }
+        },
+        "has_preview": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -7,
+            "label": "Has preview",
+            "sys_readonly": false,
+            "type": "boolean",
+            "mandatory": false,
+            "displayValue": "false",
+            "readonly": false,
+            "hint": "Defines whether preview data is available",
+            "name": "has_preview",
+            "attributes": {},
+            "choice": 0,
+            "value": "false",
+            "max_length": 40,
+            "ed": {
+                "name": "has_preview"
+            }
+        },
+        "public": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -7,
+            "label": "Public",
+            "sys_readonly": false,
+            "type": "boolean",
+            "mandatory": false,
+            "displayValue": "true",
+            "readonly": false,
+            "hint": "Widget publicly available to unauthenticated users",
+            "name": "public",
+            "attributes": {
+                "update_exempt": "true"
+            },
+            "choice": 0,
+            "value": "true",
+            "max_length": 40,
+            "ed": {
+                "name": "public"
+            }
+        },
+        "docs": {
+            "sys_mandatory": false,
+            "visible": true,
+            "table_attributes": {
+                "update_synch": "true",
+                "synch_attachments": "true"
+            },
+            "dbType": 12,
+            "label": "Docs",
+            "sys_readonly": false,
+            "type": "reference",
+            "mandatory": false,
+            "refTable": "sp_documentation",
+            "reference_type": "table",
+            "displayValue": "",
+            "readonly": false,
+            "hint": "",
+            "name": "docs",
+            "attributes": {
+                "encode_utf8": "false"
+            },
+            "reference_key": "sys_id",
+            "readonlyClickthrough": false,
+            "choice": 0,
+            "value": "",
+            "max_length": 32,
+            "ed": {
+                "reference": "sp_documentation",
+                "searchField": "title",
+                "defaultOperator": "STARTSWITH",
+                "name": "docs"
+            }
+        },
+        "client_script": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": -1,
+            "label": "Client controller",
+            "sys_readonly": false,
+            "type": "script",
+            "mandatory": false,
+            "displayValue": "function ($scope, $element, $window, $location, $rootScope, $timeout, snAttachmentHandler, $http, spUtil, userPreferences, $filter, i18n, $uibModal, spAriaUtil) {\n\n\t// Many of these fields are more configuration-type fields than profile fields. We still want to display\n\t// these to a user who is configuring their 'settings', but we shouldn't show them on a user profile page.\n\t// We need to handle this better.\n\tvar fieldExcludes = {\n\t\tsys_user: ['name', 'introduction', 'title', 'department', 'location', 'photo',\n\t\t\t\t\t\t\t 'manager', 'company'],\n\t\tlive_profile: ['short_description', 'photo']\n\t}\n\n\t$scope.openConnectConversation = function() {\n\t\t$window.open('/$c.do#?user=' + $scope.data.liveProfileID, '_blank');\n\t}\n\n\t$scope.$watch('data.dateTimeFormat', function() {\n\t\tif ($scope.data.dateTimeFormat != g_user_date_time_format)\n\t\t\t$scope.data.dateTimeFormatChanged = true;\n\t});\n\n\t$scope.uploadNewProfilePicture = function($event) {\n\t\t$event.stopPropagation();\n\t\tvar $el = $element.find('input[type=file]');\n\t\t$el.click();\n\t}\n\n\t$scope.attachFiles = function(files) {\n\t\tif (!files.files.length)\n\t\t\treturn;\n\n\t\tvar file = files.files[0];\n\n\t\tvar validImage = false;\n\n\t\tswitch(file.type) {\n\t\t\tcase 'image/jpeg':\n\t\t\tcase 'image/png':\n\t\t\tcase 'image/bmp':\n\t\t\tcase 'image/x-windows-bmp':\n\t\t\tcase 'image/gif':\n\t\t\tcase 'image/x-icon':\n\t\t\tcase 'image/svg+xml':\n\t\t\t\tvalidImage = true;\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tbreak;\n\t\t}\n\n\t\tif(!validImage) {\n\t\t\talert(file.name + \" \" + i18n.getMessage(\"isn't a recognized image file format\"));\n\t\t\treturn;\n\t\t}\n\n\t\tsnAttachmentHandler.create(\"live_profile\", $scope.data.liveProfileID).uploadAttachment(file, {\n\t\t\tsysparm_fieldname: \"photo\"\n\t\t}).then(function(response) {\n\t\t\tvar obj = {};\n\t\t\tobj.newAvatarId = response.sys_id;\n\t\t\t$scope.avatarPicture = {\n\t\t\t\t'background-image': \"url('\" + response.sys_id + \".iix')\",\n\t\t\t\t'color': 'transparent'\n\t\t\t};\n\t\t\t$rootScope.$broadcast(\"sp.avatar_changed\", obj);\n\t\t\t// timeout is required for screen reader to pick up the message once file upload prompt is dismissed\n\t\t\t$timeout(function() {\n\t\t\t   spAriaUtil.sendLiveMessage(i18n.getMessage('Profile picture updated successfully'));\n\t\t\t}, 500);\n\t\t});\n\t}\n\n\t$scope.avatarPicture = \"\";\n\n\t$http.get('/api/now/live/profiles/sys_user.' + $scope.data.sysUserID).then(function (response) {\n\t\tif (response.data.result && response.data.result.avatar){\n\t\t\tvar avatarPicture = response.data.result.avatar.replace(\"?t=small\", \"\");\n\t\t\t$scope.avatarPicture = {\n\t\t\t\t'background-image': \"url('\" + avatarPicture + \"')\",\n\t\t\t\t'color': 'transparent'\n\t\t\t};\n\t\t}\n\t});\n\n\tspUtil.recordWatch($scope, \"sys_user\", \"sys_id=\" + $scope.data.sysUserID);\n\tspUtil.recordWatch($scope, \"live_profile\", \"sys_id=\" + $scope.data.liveProfileID);\n\n\t$scope.connectEnabled = function() {\n\t\treturn $scope.data.connectEnabled && !$scope.data.isLoggedInUsersProfile;\n\t}\n\n\t$scope.openUserProfile = function($event, userID) {\n\t\t$event.stopPropagation();\n\t\t$event.preventDefault();\n\t\t$location.search(\"id=user_profile&sys_id=\" + userID);\n\t}\n\n\t$scope.getSysUserModelFields = function() {\n\t\tif ($scope.data.userExists) {\n\t\t\treturn $scope.data.sysUserModelList\n\t\t\t\t\t\t\t.filter(function(field) {\n\t\t\t\t\t\t\t\treturn $scope.displayField(\"sys_user\", field.name);\n\t\t\t\t\t\t\t});\n\t\t}\n\t\treturn [];\n\t}\n\t\n\n\t$scope.reloadPage = function() {\n\t\t\t$window.location.reload(true);\n\t};\n\n\t$scope.teamExists = function() {\n\t\treturn $scope.data.teamData.direct_reports.length > 0 ||\n\t\t\t$scope.data.teamData.members.length > 0 ||\n\t\t\t$scope.data.teamData.manager;\n\t}\n\n\tvar models = {\n\t\tsys_user: $scope.data.sysUserModel,\n\t\tlive_profile: $scope.data.liveProfileModel\n\t}\n\n\t$scope.displayField = function(tableName, field, isHeader) {\n\t\tif (!isHeader && fieldExcludes[tableName].indexOf(field) > -1) return false;\n\n\t\tif (models[tableName][field] && models[tableName][field].type === \"boolean\") return false;\n\n\t\tif ($scope.data.isLoggedInUsersProfile) {\n\t\t\tif (models[tableName][field] && models[tableName][field].readonly)\n\t\t\t\treturn models[tableName][field].displayValue;\n\t\t\telse\n\t\t\t\treturn models[tableName][field];\n\t\t} else {\n\t\t\treturn models[tableName][field] && models[tableName][field].displayValue;\n\t\t}\n\t}\n\n\t$timeout(function(){\n\t\t$rootScope.$broadcast('finishedChanged', {profile: $scope.data.teamData});\n\t});\n\n\t$scope.sysUserModelFields = $scope.getSysUserModelFields();\n\n}",
+            "readonly": false,
+            "hint": "",
+            "name": "client_script",
+            "attributes": {
+                "client_script": "true"
+            },
+            "choice": 0,
+            "value": "function ($scope, $element, $window, $location, $rootScope, $timeout, snAttachmentHandler, $http, spUtil, userPreferences, $filter, i18n, $uibModal, spAriaUtil) {\n\n\t// Many of these fields are more configuration-type fields than profile fields. We still want to display\n\t// these to a user who is configuring their 'settings', but we shouldn't show them on a user profile page.\n\t// We need to handle this better.\n\tvar fieldExcludes = {\n\t\tsys_user: ['name', 'introduction', 'title', 'department', 'location', 'photo',\n\t\t\t\t\t\t\t 'manager', 'company'],\n\t\tlive_profile: ['short_description', 'photo']\n\t}\n\n\t$scope.openConnectConversation = function() {\n\t\t$window.open('/$c.do#?user=' + $scope.data.liveProfileID, '_blank');\n\t}\n\n\t$scope.$watch('data.dateTimeFormat', function() {\n\t\tif ($scope.data.dateTimeFormat != g_user_date_time_format)\n\t\t\t$scope.data.dateTimeFormatChanged = true;\n\t});\n\n\t$scope.uploadNewProfilePicture = function($event) {\n\t\t$event.stopPropagation();\n\t\tvar $el = $element.find('input[type=file]');\n\t\t$el.click();\n\t}\n\n\t$scope.attachFiles = function(files) {\n\t\tif (!files.files.length)\n\t\t\treturn;\n\n\t\tvar file = files.files[0];\n\n\t\tvar validImage = false;\n\n\t\tswitch(file.type) {\n\t\t\tcase 'image/jpeg':\n\t\t\tcase 'image/png':\n\t\t\tcase 'image/bmp':\n\t\t\tcase 'image/x-windows-bmp':\n\t\t\tcase 'image/gif':\n\t\t\tcase 'image/x-icon':\n\t\t\tcase 'image/svg+xml':\n\t\t\t\tvalidImage = true;\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tbreak;\n\t\t}\n\n\t\tif(!validImage) {\n\t\t\talert(file.name + \" \" + i18n.getMessage(\"isn't a recognized image file format\"));\n\t\t\treturn;\n\t\t}\n\n\t\tsnAttachmentHandler.create(\"live_profile\", $scope.data.liveProfileID).uploadAttachment(file, {\n\t\t\tsysparm_fieldname: \"photo\"\n\t\t}).then(function(response) {\n\t\t\tvar obj = {};\n\t\t\tobj.newAvatarId = response.sys_id;\n\t\t\t$scope.avatarPicture = {\n\t\t\t\t'background-image': \"url('\" + response.sys_id + \".iix')\",\n\t\t\t\t'color': 'transparent'\n\t\t\t};\n\t\t\t$rootScope.$broadcast(\"sp.avatar_changed\", obj);\n\t\t\t// timeout is required for screen reader to pick up the message once file upload prompt is dismissed\n\t\t\t$timeout(function() {\n\t\t\t   spAriaUtil.sendLiveMessage(i18n.getMessage('Profile picture updated successfully'));\n\t\t\t}, 500);\n\t\t});\n\t}\n\n\t$scope.avatarPicture = \"\";\n\n\t$http.get('/api/now/live/profiles/sys_user.' + $scope.data.sysUserID).then(function (response) {\n\t\tif (response.data.result && response.data.result.avatar){\n\t\t\tvar avatarPicture = response.data.result.avatar.replace(\"?t=small\", \"\");\n\t\t\t$scope.avatarPicture = {\n\t\t\t\t'background-image': \"url('\" + avatarPicture + \"')\",\n\t\t\t\t'color': 'transparent'\n\t\t\t};\n\t\t}\n\t});\n\n\tspUtil.recordWatch($scope, \"sys_user\", \"sys_id=\" + $scope.data.sysUserID);\n\tspUtil.recordWatch($scope, \"live_profile\", \"sys_id=\" + $scope.data.liveProfileID);\n\n\t$scope.connectEnabled = function() {\n\t\treturn $scope.data.connectEnabled && !$scope.data.isLoggedInUsersProfile;\n\t}\n\n\t$scope.openUserProfile = function($event, userID) {\n\t\t$event.stopPropagation();\n\t\t$event.preventDefault();\n\t\t$location.search(\"id=user_profile&sys_id=\" + userID);\n\t}\n\n\t$scope.getSysUserModelFields = function() {\n\t\tif ($scope.data.userExists) {\n\t\t\treturn $scope.data.sysUserModelList\n\t\t\t\t\t\t\t.filter(function(field) {\n\t\t\t\t\t\t\t\treturn $scope.displayField(\"sys_user\", field.name);\n\t\t\t\t\t\t\t});\n\t\t}\n\t\treturn [];\n\t}\n\t\n\n\t$scope.reloadPage = function() {\n\t\t\t$window.location.reload(true);\n\t};\n\n\t$scope.teamExists = function() {\n\t\treturn $scope.data.teamData.direct_reports.length > 0 ||\n\t\t\t$scope.data.teamData.members.length > 0 ||\n\t\t\t$scope.data.teamData.manager;\n\t}\n\n\tvar models = {\n\t\tsys_user: $scope.data.sysUserModel,\n\t\tlive_profile: $scope.data.liveProfileModel\n\t}\n\n\t$scope.displayField = function(tableName, field, isHeader) {\n\t\tif (!isHeader && fieldExcludes[tableName].indexOf(field) > -1) return false;\n\n\t\tif (models[tableName][field] && models[tableName][field].type === \"boolean\") return false;\n\n\t\tif ($scope.data.isLoggedInUsersProfile) {\n\t\t\tif (models[tableName][field] && models[tableName][field].readonly)\n\t\t\t\treturn models[tableName][field].displayValue;\n\t\t\telse\n\t\t\t\treturn models[tableName][field];\n\t\t} else {\n\t\t\treturn models[tableName][field] && models[tableName][field].displayValue;\n\t\t}\n\t}\n\n\t$timeout(function(){\n\t\t$rootScope.$broadcast('finishedChanged', {profile: $scope.data.teamData});\n\t});\n\n\t$scope.sysUserModelFields = $scope.getSysUserModelFields();\n\n}",
+            "max_length": 8000,
+            "ed": {
+                "name": "client_script"
+            }
+        },
+        "data_table": {
+            "sys_mandatory": true,
+            "visible": true,
+            "dbType": 12,
+            "default_value": "sp_instance",
+            "label": "Data table",
+            "sys_readonly": false,
+            "type": "table_name",
+            "mandatory": true,
+            "displayValue": "sp_instance",
+            "readonly": false,
+            "hint": "",
+            "name": "data_table",
+            "attributes": {
+                "base_table": "sp_instance",
+                "base_start": "true"
+            },
+            "choice": 0,
+            "choices": [],
+            "value": "sp_instance",
+            "max_length": 80,
+            "ed": {
+                "name": "data_table"
+            }
+        },
+        "name": {
+            "sys_mandatory": true,
+            "visible": true,
+            "dbType": 12,
+            "label": "Name",
+            "sys_readonly": false,
+            "type": "translated_field",
+            "mandatory": true,
+            "displayValue": "User Profile Clone",
+            "readonly": false,
+            "hint": "",
+            "name": "name",
+            "attributes": {},
+            "choice": 0,
+            "value": "User Profile Clone",
+            "max_length": 40,
+            "ed": {
+                "name": "name"
+            }
+        },
+        "sys_scope": {
+            "sys_mandatory": false,
+            "visible": true,
+            "table_attributes": {
+                "metadata_link_exempt": "true"
+            },
+            "dbType": 12,
+            "label": "Application",
+            "sys_readonly": true,
+            "type": "reference",
+            "mandatory": false,
+            "refTable": "sys_scope",
+            "reference_type": "table",
+            "displayValue": "Global",
+            "readonly": true,
+            "hint": "Application containing this record",
+            "name": "sys_scope",
+            "attributes": {
+                "encode_utf8": "false",
+                "list_force_default": "true",
+                "readonly_clickthrough": "true",
+                "ignore_filter_on_new": "true"
+            },
+            "reference_key": "sys_id",
+            "readonlyClickthrough": true,
+            "choice": 0,
+            "value": "global",
+            "max_length": 32,
+            "ed": {
+                "reference": "sys_scope",
+                "searchField": "name",
+                "defaultOperator": "STARTSWITH",
+                "name": "sys_scope"
+            }
+        },
+        "id": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": 12,
+            "label": "ID",
+            "sys_readonly": false,
+            "type": "string",
+            "mandatory": false,
+            "displayValue": "user_profile_clone",
+            "readonly": false,
+            "hint": "Identifier for $sp.embedWidget()",
+            "name": "id",
+            "attributes": {
+                "edge_encryption_enabled": "true"
+            },
+            "choice": 0,
+            "value": "user_profile_clone",
+            "max_length": 40,
+            "ed": {
+                "name": "id"
+            }
+        },
+        "field_list": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dependentField": "data_table",
+            "dbType": -1,
+            "label": "Fields",
+            "sys_readonly": false,
+            "type": "field_list",
+            "mandatory": false,
+            "displayValue": "",
+            "readonly": false,
+            "hint": "",
+            "name": "field_list",
+            "attributes": {
+                "is_multi_text": "false"
+            },
+            "choice": 0,
+            "value": "",
+            "max_length": 1000,
+            "ed": {
+                "dependent_value": "sp_instance",
+                "name": "field_list"
+            }
+        },
+        "controller_as": {
+            "sys_mandatory": false,
+            "visible": true,
+            "dbType": 12,
+            "label": "controllerAs",
+            "sys_readonly": false,
+            "type": "string",
+            "mandatory": false,
+            "displayValue": "c",
+            "readonly": false,
+            "hint": "Identifier name for a reference to the controller in the directive's scope",
+            "name": "controller_as",
+            "attributes": {
+                "edge_encryption_enabled": "true"
+            },
+            "choice": 0,
+            "value": "c",
+            "max_length": 100,
+            "ed": {
+                "name": "controller_as"
+            }
+        }
+    }
+}
