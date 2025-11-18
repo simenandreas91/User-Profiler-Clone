@@ -12,6 +12,10 @@ function ($scope, $location, $uibModal, $window) {
 	c.searchUsers = function() {
 		c.state.error = "";
 		var query = (c.searchText || "").trim();
+		console.log("[UserProfileClone] client searchUsers input", {
+			query: query,
+			type: typeof query
+		});
 
 		if (!query) {
 			c.results = [];
@@ -20,11 +24,16 @@ function ($scope, $location, $uibModal, $window) {
 		}
 
 		c.state.loading = true;
-		$scope.server.update({
+		// Use .get so the input payload (action/search) is actually sent to the server script
+		$scope.server.get({
 			action: "search_users",
 			search: query
 		}).then(function(response) {
 			var payload = unwrap(response);
+			console.log("[UserProfileClone] client searchUsers response", {
+				payload: payload,
+				resultsType: typeof payload.results
+			});
 			var list = payload.results || [];
 			c.results = filterLocal(list, query);
 			c.lastQuery = query;

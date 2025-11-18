@@ -1,4 +1,5 @@
 (function() {
+	gs.info("[UserProfileClone] server entry input=" + new global.JSON().encode(input));
 	if (input && input.action === "update_session_tracking_info") {
 		gs.getSession().putProperty("usage_tracking_allowed_for_session", input.user_tracking);
 		return;
@@ -9,9 +10,11 @@
 	data.lastQuery = data.lastQuery || "";
 
 	if (input && input.action === "search_users") {
-		var searchTerm = resolveSearch(input);
+		var searchTerm = input.search || input.q || resolveSearch(input);
 		data.lastQuery = (searchTerm || "").trim();
+		gs.info("[UserProfileClone] action=search_users lastQuery='" + data.lastQuery + "' input=" + new global.JSON().encode(input));
 		data.results = searchUsers(data.lastQuery);
+		gs.info("[UserProfileClone] action=search_users results_count=" + (data.results || []).length);
 		return;
 	}
 
@@ -22,19 +25,20 @@
 
 	// Initial load, nothing searched yet
 	data.lastQuery = "";
-	data.results = searchUsers("");
+	data.results = [];
 
 	function searchUsers(query) {
 		var trimmed = (query || "").trim();
+		if (!trimmed)
+			return [];
 		var gr = new GlideRecordSecure("sys_user");
 		gr.addActiveQuery();
-		if (trimmed) {
-			var nameQ = gr.addQuery("name", "CONTAINS", trimmed);
-			nameQ.addOrCondition("first_name", "CONTAINS", trimmed);
-			nameQ.addOrCondition("last_name", "CONTAINS", trimmed);
-		}
+		var nameQ = gr.addQuery("name", "STARTSWITH", trimmed);
+		nameQ.addOrCondition("first_name", "STARTSWITH", trimmed);
+		nameQ.addOrCondition("last_name", "STARTSWITH", trimmed);
+		gs.info("[UserProfileClone] searchUsers trimmed='" + trimmed + "'", "UserProfile");
 		gr.orderBy("name");
-		gr.setLimit(100);
+		//gr.setLimit(100);
 
 		var results = [];
 		gr.query();
