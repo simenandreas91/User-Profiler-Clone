@@ -59,28 +59,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/ng-template" id="user-profile-modal.html">
-  <div class="modal-header">
-    <h4 class="modal-title">{{profile.name}}</h4>
-    <button type="button" class="close" aria-label="Close" ng-click="close()"><span aria-hidden="true">&times;</span></button>
-  </div>
-  <div class="modal-body user-profile-modal-body">
-    <div class="modal-avatar" ng-if="profile.photo" ng-style="{'background-image':'url(' + profile.photo + ')'}"></div>
-    <div class="modal-avatar placeholder" ng-if="!profile.photo"><i class="fa fa-user"></i></div>
-    <div class="modal-meta">
-      <div class="row meta-row"><span class="label">Title</span><span class="value">{{profile.title || '—'}}</span></div>
-      <div class="row meta-row"><span class="label">Department</span><span class="value">{{profile.department || '—'}}</span></div>
-      <div class="row meta-row"><span class="label">Phone number</span><span class="value">{{profile.phone || '—'}}</span></div>
-      <div class="row meta-row"><span class="label">Mobile phone</span><span class="value">{{profile.mobile_phone || '—'}}</span></div>
-      <div class="row meta-row"><span class="label">Email</span><span class="value"><a ng-if="profile.email" ng-href="mailto:{{profile.email}}">{{profile.email}}</a><span ng-if="!profile.email">—</span></span></div>
-      <div class="row meta-row"><span class="label">Location</span><span class="value">{{profile.location || '—'}}</span></div>
-      <div class="row meta-row"><span class="label">Company</span><span class="value">{{profile.company || '—'}}</span></div>
-      <div class="row meta-row"><span class="label">Manager</span><span class="value">{{profile.manager || '—'}}</span></div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-default" ng-click="close()">Close</button>
-    <a class="btn btn-primary" ng-href="?id=user_profile&sys_id={{profile.sys_id}}">Open full profile</a>
-  </div>
-</script>

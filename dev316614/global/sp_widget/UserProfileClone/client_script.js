@@ -66,23 +66,6 @@ function ($scope, $location, $uibModal, $window) {
 		$window.open(url, "_blank");
 	};
 
-	function showProfileModal(profile) {
-		$uibModal.open({
-			templateUrl: "user-profile-modal.html",
-			windowClass: "user-profile-modal",
-			size: "md",
-			controller: function($scope, $uibModalInstance, profile) {
-				$scope.profile = profile;
-				$scope.close = function() {
-					$uibModalInstance.dismiss("close");
-				};
-			},
-			resolve: {
-				profile: function() { return profile; }
-			}
-		});
-	}
-
 	function unwrap(response) {
 		var data = response;
 		var seen = 0; // prevent runaway loops
