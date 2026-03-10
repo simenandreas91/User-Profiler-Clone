@@ -20,7 +20,7 @@
     </button>
   </div>
 
-  <p class="subtle-text" ng-if="!c.lastQuery">Search by a first or last name to see matching colleagues.</p>
+  <p class="subtle-text" ng-if="!c.lastQuery">Search by name, phone number, or department to see matching colleagues.</p>
 
   <div class="alert alert-danger" ng-if="c.state.error">
     {{::c.state.error}}
@@ -28,7 +28,7 @@
 
   <div class="placeholder" ng-if="!c.state.loading && !c.results.length && c.lastQuery">
     <i class="fa fa-search" aria-hidden="true"></i>
-    <p>No users found for "{{::c.lastQuery}}". Try another name.</p>
+    <p>No users found for "{{::c.lastQuery}}". Try another name, phone number, or department.</p>
   </div>
 
   <div class="card-grid" ng-if="c.results.length">

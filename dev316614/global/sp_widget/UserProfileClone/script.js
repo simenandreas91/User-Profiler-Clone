@@ -36,6 +36,9 @@
 		var nameQ = gr.addQuery("name", "STARTSWITH", trimmed);
 		nameQ.addOrCondition("first_name", "STARTSWITH", trimmed);
 		nameQ.addOrCondition("last_name", "STARTSWITH", trimmed);
+		nameQ.addOrCondition("phone", "CONTAINS", trimmed);
+		nameQ.addOrCondition("mobile_phone", "CONTAINS", trimmed);
+		nameQ.addOrCondition("department.name", "CONTAINS", trimmed);
 		gs.info("[UserProfileClone] searchUsers trimmed='" + trimmed + "'", "UserProfile");
 		gr.orderBy("name");
 		//gr.setLimit(100);
@@ -76,6 +79,7 @@
 			name: userGR.getDisplayValue("name") || "",
 			title: userGR.getDisplayValue("title") || "",
 			phone: userGR.getDisplayValue("phone") || "",
+			mobile_phone: userGR.getDisplayValue("mobile_phone") || "",
 			department: userGR.getDisplayValue("department") || "",
 			photo: userGR.getDisplayValue("photo") || ""
 		};
