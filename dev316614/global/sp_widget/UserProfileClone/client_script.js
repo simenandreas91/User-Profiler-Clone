@@ -91,6 +91,7 @@ function ($scope, $location, $uibModal, $window) {
 			return ((item.name || "").toLowerCase().indexOf(q) > -1) ||
 				((item.title || "").toLowerCase().indexOf(q) > -1) ||
 				((item.department || "").toLowerCase().indexOf(q) > -1) ||
+				((item.parent_department || "").toLowerCase().indexOf(q) > -1) ||
 				((item.phone || "").toLowerCase().indexOf(q) > -1) ||
 				((item.mobile_phone || "").toLowerCase().indexOf(q) > -1);
 		});

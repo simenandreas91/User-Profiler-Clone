@@ -39,6 +39,7 @@
 		nameQ.addOrCondition("phone", "CONTAINS", trimmed);
 		nameQ.addOrCondition("mobile_phone", "CONTAINS", trimmed);
 		nameQ.addOrCondition("department.name", "CONTAINS", trimmed);
+		nameQ.addOrCondition("u_parent_department", "CONTAINS", trimmed);
 		gs.info("[UserProfileClone] searchUsers trimmed='" + trimmed + "'", "UserProfile");
 		gr.orderBy("name");
 		//gr.setLimit(100);
@@ -81,6 +82,7 @@
 			phone: userGR.getDisplayValue("phone") || "",
 			mobile_phone: userGR.getDisplayValue("mobile_phone") || "",
 			department: userGR.getDisplayValue("department") || "",
+			parent_department: userGR.getDisplayValue("u_parent_department") || "",
 			photo: userGR.getDisplayValue("photo") || ""
 		};
 	}
@@ -100,6 +102,7 @@
 			name: userGR.getDisplayValue("name") || "",
 			title: userGR.getDisplayValue("title") || "",
 			department: userGR.getDisplayValue("department") || "",
+			parent_department: userGR.getDisplayValue("u_parent_department") || "",
 			phone: userGR.getDisplayValue("phone") || "",
 			mobile_phone: userGR.getDisplayValue("mobile_phone") || "",
 			email: userGR.getDisplayValue("email") || "",
